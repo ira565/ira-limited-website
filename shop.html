@@ -1,1 +1,355 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#536b2f"><title>Ira Limited & Co. — Shop</title><style>:root{--o:#536b2f;--c:#f7f2e7;--p:#fffdf8;--i:#20251d;--m:#6d7368;--g:#b18a4b;--l:#e3dac7}*{box-sizing:border-box}body{margin:0;background:var(--c);color:var(--i);font:14px Arial,sans-serif}button{font:inherit;cursor:pointer}a{text-decoration:none;color:inherit}.top{background:#202b18;color:#fff;text-align:center;padding:9px;font-size:10px;letter-spacing:1.5px}.nav{position:sticky;top:0;z-index:5;background:#f7f2e7ee;border-bottom:1px solid var(--l)}.navin,.wrap{max-width:1180px;margin:auto;padding-left:22px;padding-right:22px}.navin{min-height:75px;display:flex;align-items:center;justify-content:space-between}.brand{font:700 20px Georgia;color:var(--o);letter-spacing:2px}.brand small{display:block;text-align:center;color:var(--g);font:700 8px Arial;letter-spacing:3px;margin-top:3px}.cartbtn,.add{background:var(--o);color:#fff;border:0;border-radius:999px;padding:11px 18px;font-weight:700}.hero{padding-top:65px;padding-bottom:40px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}.ey{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--g)}h1{font:400 clamp(44px,6vw,78px)/.95 Georgia;color:var(--o);margin:14px 0 20px}.hero p{font-size:16px;line-height:1.8;color:var(--m)}.heroart{min-height:300px;border-radius:28px;background:linear-gradient(135deg,#e9e1cf,#d8d0bb);display:grid;place-items:center;text-align:center;color:var(--o);font:700 28px Georgia}.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding-top:20px;padding-bottom:55px}.cat{background:var(--p);border:1px solid var(--l);border-radius:18px;padding:20px;text-align:left}.cat.active{border-color:var(--o);box-shadow:0 10px 30px #2b371f12}.cat strong{display:block;color:var(--o);font:700 17px Georgia;margin-bottom:7px}.cat span{font-size:12px;color:var(--m)}section{padding:45px 0}.head{text-align:center;max-width:700px;margin:0 auto 32px}.head h2{font:400 45px Georgia;color:var(--o);margin:10px 0}.head p{color:var(--m);line-height:1.7}.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--p);border:1px solid var(--l);border-radius:20px;overflow:hidden}.pic{height:185px;background:linear-gradient(145deg,#e9e0ca,#d5cbb3);display:grid;place-items:center;text-align:center;padding:20px;color:var(--o);font:700 18px Georgia}.info{padding:18px}.tag{font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--g);font-weight:800}.product h3{font:21px Georgia;color:var(--o);margin:8px 0}.desc{font-size:12px;line-height:1.6;color:var(--m);min-height:40px}.price{font-weight:800;font-size:17px;margin:14px 0}.add{width:100%}.membership{background:var(--o);color:#fff}.membership h2{color:#fff}.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.plan{background:#61763d;border:1px solid #84955f;border-radius:20px;padding:25px}.plan h3{font:25px Georgia;margin:8px 0}.plan p{color:#eef2e9;line-height:1.7;font-size:13px}.plan button{border:0;border-radius:999px;padding:11px 17px;background:#fff;color:var(--o);font-weight:800}.drawer{display:none;position:fixed;inset:0;background:#0006;z-index:20}.drawer.open{display:block}.cart{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:var(--p);padding:24px;overflow:auto}.close{float:right;border:0;background:none;font-size:25px}.cart h2{font:34px Georgia;color:var(--o)}.item{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--l);padding:15px 0}.qty{display:flex;align-items:center;gap:8px}.qty button{border:1px solid var(--l);background:#fff;border-radius:50%;width:28px;height:28px}.total{display:flex;justify-content:space-between;font-weight:800;font-size:18px;margin:22px 0}.checkout{width:100%;border:0;border-radius:999px;padding:14px;background:var(--g);color:#fff;font-weight:800}footer{background:#202b18;color:#dfe7d9;padding:35px 0;margin-top:40px}@media(max-width:850px){.hero{grid-template-columns:1fr}.cats,.products{grid-template-columns:1fr 1fr}.plans{grid-template-columns:1fr}}@media(max-width:520px){.cats,.products{grid-template-columns:1fr}}</style></head><body><div class="top">IRA LIMITED & CO. • ORGANIC • FRESH • HOMEMADE • MEMBERSHIP</div><nav class="nav"><div class="navin"><a class="brand" href="index.html">IRA LIMITED & CO.<small>PURE • NATURAL • YOURS</small></a><button class="cartbtn" onclick="openCart()">🛒 Cart <span id="count">0</span></button></div></nav><main><section class="hero wrap"><div><div class="ey">THE IRA MARKETPLACE</div><h1>Good food for every part of your day.</h1><p>Shop organic pantry essentials, fresh vegetables, home-baked favourites and our protein breakfast membership in one elegant storefront.</p></div><div class="heroart">IRA LIMITED & CO.<br><span style="font:14px Arial;color:#6d7368">Organic • Fresh • Homemade</span></div></section><div class="wrap cats"><button class="cat active" onclick="filter('All',this)"><strong>All products</strong><span>Explore everything</span></button><button class="cat" onclick="filter('Organic Products',this)"><strong>Organic Products</strong><span>Oils, honey, ghee & more</span></button><button class="cat" onclick="filter('Vegetables',this)"><strong>Vegetables</strong><span>Fresh seasonal produce</span></button><button class="cat" onclick="filter('Home Baking',this)"><strong>Home Baking</strong><span>Fresh homemade favourites</span></button></div><section><div class="wrap"><div class="head"><div class="ey">SHOP THE COLLECTION</div><h2>Curated for your kitchen.</h2><p>Prices shown are temporary and can be changed later.</p></div><div id="products" class="products"></div></div></section><section class="membership"><div class="wrap"><div class="head"><div class="ey" style="color:#d9c38e">MEMBERSHIP</div><h2>The Ira Breakfast Club</h2><p style="color:#e7eadf">Subscribe to a protein-rich breakfast meal according to your chosen plan and delivery area.</p></div><div class="plans"><div class="plan"><div class="ey" style="color:#d9c38e">DAILY</div><h3>Breakfast Daily</h3><p>One breakfast serving on scheduled days. Menu and pricing confirmed before subscription.</p><button onclick="wa('Daily Breakfast')">Choose plan</button></div><div class="plan"><div class="ey" style="color:#d9c38e">WEEKLY</div><h3>7-Day Routine</h3><p>A convenient weekly breakfast routine with protein-rich menu options.</p><button onclick="wa('7-Day Routine')">Choose plan</button></div><div class="plan"><div class="ey" style="color:#d9c38e">MONTHLY</div><h3>Breakfast Club</h3><p>A longer-term membership option. Ask us for current pricing and delivery.</p><button onclick="wa('Breakfast Club')">Choose plan</button></div></div></div></section></main><footer><div class="wrap">© 2026 Ira Limited & Co. • <a href="https://wa.me/919180441508" target="_blank">WhatsApp</a></div></footer><div id="drawer" class="drawer"><aside class="cart"><button class="close" onclick="closeCart()">×</button><h2>Your Cart</h2><div id="items"></div><div class="total"><span>Total</span><span id="total">₹0</span></div><button class="checkout" onclick="waOrder()">Order via WhatsApp</button></aside></div><script>const products=[{id:1,cat:'Organic Products',name:'Organic Peanut Oil',desc:'Cold-pressed pantry essential • 1 L',price:899},{id:2,cat:'Organic Products',name:'Organic Honey',desc:'Naturally presented honey • 500 g',price:649},{id:3,cat:'Organic Products',name:'Cow Ghee',desc:'Premium pantry ghee • 500 ml',price:999},{id:4,cat:'Organic Products',name:'Organic Coconut Oil',desc:'Everyday pantry essential • 1 L',price:749},{id:5,cat:'Vegetables',name:'Fresh Spinach',desc:'Fresh greens • 1 bunch',price:40},{id:6,cat:'Vegetables',name:'Tomatoes',desc:'Fresh everyday tomatoes • 1 kg',price:40},{id:7,cat:'Vegetables',name:'Potatoes',desc:'Fresh potatoes • 1 kg',price:40},{id:8,cat:'Vegetables',name:'Green Beans',desc:'Fresh crisp beans • 1 kg',price:85},{id:9,cat:'Home Baking',name:'Banana Loaf',desc:'Homemade baked loaf',price:349},{id:10,cat:'Home Baking',name:'Tea Cake',desc:'Fresh homemade tea cake',price:399},{id:11,cat:'Home Baking',name:'Oat & Seed Cookies',desc:'Homemade cookie box',price:299},{id:12,cat:'Home Baking',name:'Brownies',desc:'Fresh homemade brownies',price:449},{id:13,cat:'Home Baking',name:'Protein Mix',desc:'Homemade protein-focused mix',price:399},{id:14,cat:'Home Baking',name:'Multigrain Biscuits',desc:'Homemade multigrain biscuits',price:299},{id:15,cat:'Home Baking',name:'Protein Cheesecake',desc:'Homemade protein-focused cheesecake',price:549},{id:16,cat:'Home Baking',name:'Protein Tiramisu',desc:'Homemade protein-focused tiramisu',price:599}];let cart=JSON.parse(localStorage.getItem('iraCart')||'[]');function render(list=products){document.getElementById('products').innerHTML=list.map(p=>`<article class="product"><div class="pic">${p.name}<br><span style="font:11px Arial;color:#6d7368">${p.cat}</span></div><div class="info"><div class="tag">${p.cat}</div><h3>${p.name}</h3><div class="desc">${p.desc}</div><div class="price">₹${p.price.toLocaleString('en-IN')}</div><button class="add" onclick="add(${p.id})">Add to cart</button></div></article>`).join('')}function filter(c,e){document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));e.classList.add('active');render(c==='All'?products:products.filter(p=>p.cat===c))}function add(id){let p=products.find(x=>x.id===id),x=cart.find(x=>x.id===id);x?x.qty++:cart.push({...p,qty:1});save();openCart()}function save(){localStorage.setItem('iraCart',JSON.stringify(cart));document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);cartView()}function cartView(){document.getElementById('items').innerHTML=cart.length?cart.map(x=>`<div class="item"><span>${x.name}<br><small>₹${x.price} each</small></span><span class="qty"><button onclick="change(${x.id},-1)">−</button>${x.qty}<button onclick="change(${x.id},1)">+</button></span></div>`).join(''):'<p>Your cart is empty.</p>';document.getElementById('total').textContent='₹'+cart.reduce((a,x)=>a+x.price*x.qty,0).toLocaleString('en-IN')}function change(id,n){let x=cart.find(x=>x.id===id);x.qty+=n;if(x.qty<1)cart=cart.filter(y=>y.id!==id);save()}function openCart(){document.getElementById('drawer').classList.add('open');cartView()}function closeCart(){document.getElementById('drawer').classList.remove('open')}function wa(plan){window.open('https://wa.me/919180441508?text='+encodeURIComponent('Hi Ira Limited & Co., I am interested in the '+plan+' protein breakfast membership. Please send me the current menu, pricing and delivery details.'),'_blank')}function waOrder(){let lines=cart.map(x=>x.name+' x'+x.qty).join(', '),total=cart.reduce((a,x)=>a+x.price*x.qty,0);window.open('https://wa.me/919180441508?text='+encodeURIComponent('Hi Ira Limited & Co., I would like to order: '+lines+'. Total: ₹'+total),'_blank')}render();save();</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ira Limited & Co. | Shop Natural Products</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Georgia, "Times New Roman", serif;
+  background:#f5f0df;
+  color:#183b28;
+}
+
+header{
+  background:#173b27;
+  color:#f7f0dc;
+  padding:22px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:34px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.logo span{
+  display:block;
+  font-size:11px;
+  letter-spacing:4px;
+  text-align:center;
+  margin-top:-4px;
+}
+
+nav a{
+  color:#f7f0dc;
+  text-decoration:none;
+  margin-left:25px;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+}
+
+.hero{
+  text-align:center;
+  padding:75px 20px;
+  background:linear-gradient(rgba(245,240,223,.88),rgba(245,240,223,.88)),
+  url("hero-product.svg") center/cover;
+}
+
+.hero h1{
+  font-size:55px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:19px;
+  color:#52634f;
+  margin-bottom:28px;
+}
+
+.button{
+  display:inline-block;
+  background:#173b27;
+  color:white;
+  padding:14px 30px;
+  border-radius:30px;
+  text-decoration:none;
+  font-family:Arial,sans-serif;
+}
+
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:60px 25px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.section-title h2{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.section-title p{
+  color:#68715f;
+  font-family:Arial,sans-serif;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:#fffdf5;
+  border:1px solid #d8cfb2;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 25px rgba(30,50,35,.08);
+  transition:.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 30px rgba(30,50,35,.15);
+}
+
+.card img{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  display:block;
+}
+
+.card-content{
+  padding:22px;
+}
+
+.card h3{
+  font-size:23px;
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#69705f;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+  min-height:43px;
+}
+
+.price{
+  font-size:21px;
+  font-weight:bold;
+  margin:18px 0;
+}
+
+.order{
+  display:block;
+  text-align:center;
+  background:#173b27;
+  color:#fff;
+  text-decoration:none;
+  padding:12px;
+  border-radius:25px;
+  font-family:Arial,sans-serif;
+}
+
+.badge{
+  display:inline-block;
+  background:#e5ead6;
+  color:#31553b;
+  padding:5px 10px;
+  border-radius:15px;
+  font:12px Arial,sans-serif;
+  margin-bottom:12px;
+}
+
+.membership{
+  background:#173b27;
+  color:#fff;
+  margin:20px auto 70px;
+  max-width:1100px;
+  padding:55px 30px;
+  border-radius:25px;
+  text-align:center;
+}
+
+.membership h2{
+  font-size:38px;
+  margin-bottom:15px;
+}
+
+.membership p{
+  max-width:700px;
+  margin:0 auto 25px;
+  line-height:1.7;
+  color:#e8eadc;
+  font-family:Arial,sans-serif;
+}
+
+.membership .button{
+  background:#e7dfc4;
+  color:#173b27;
+}
+
+footer{
+  background:#10291c;
+  color:#dddccf;
+  text-align:center;
+  padding:40px 20px;
+}
+
+footer h2{
+  color:#fff;
+  margin-bottom:10px;
+}
+
+footer p{
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  line-height:1.8;
+}
+
+@media(max-width:700px){
+  header{
+    flex-direction:column;
+    gap:15px;
+  }
+
+  nav a{
+    margin:0 7px;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    Ira
+    <span>LIMITED & CO</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="#membership">Membership</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Pure. Natural. Yours.</h1>
+  <p>Premium food essentials, thoughtfully selected for your everyday life.</p>
+  <a href="#products" class="button">Shop Our Collection</a>
+</section>
+
+<section class="section" id="products">
+
+  <div class="section-title">
+    <h2>Our Collection</h2>
+    <p>Natural goodness, brought to your home.</p>
+  </div>
+
+  <div class="products">
+
+    <div class="card">
+      <img src="peanut%20oil.jpeg" alt="Ira Organic Peanut Oil">
+      <div class="card-content">
+        <span class="badge">COLD PRESSED</span>
+        <h3>Organic Peanut Oil</h3>
+        <p>100% pure peanut oil with a naturally rich taste.</p>
+        <div class="price">₹ —</div>
+        <a class="order" href="https://wa.me/" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="coconut%20oil.jpeg" alt="Ira Coconut Oil">
+      <div class="card-content">
+        <span class="badge">NATURAL</span>
+        <h3>Coconut Oil</h3>
+        <p>Pure coconut oil for everyday cooking and wellness.</p>
+        <div class="price">₹ —</div>
+        <a class="order" href="https://wa.me/" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="flaxseed%20oil.jpeg" alt="Ira Flaxseed Oil">
+      <div class="card-content">
+        <span class="badge">COLD PRESSED</span>
+        <h3>Flaxseed Oil</h3>
+        <p>Premium flaxseed oil with a naturally distinctive taste.</p>
+        <div class="price">₹ —</div>
+        <a class="order" href="https://wa.me/" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ghee.jpeg" alt="Ira Pure Ghee">
+      <div class="card-content">
+        <span class="badge">TRADITIONAL</span>
+        <h3>Pure Ghee</h3>
+        <p>Traditional goodness made for everyday meals.</p>
+        <div class="price">₹ —</div>
+        <a class="order" href="https://wa.me/" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="egg.jpeg" alt="Ira Farm Fresh Eggs">
+      <div class="card-content">
+        <span class="badge">FARM FRESH</span>
+        <h3>Farm Fresh Eggs</h3>
+        <p>Fresh eggs carefully selected for your family.</p>
+        <div class="price">₹ —</div>
+        <a class="order" href="https://wa.me/" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="brownies.jpeg" alt="Ira Homemade Brownies">
+      <div class="card-content">
+        <span class="badge">HOMEMADE</span>
+        <h3>Homemade Brownies</h3>
+        <p>Freshly baked brownies made with care and quality ingredients.</p>
+        <div class="price">₹ —</div>
+        <a class="order" href="https://wa.me/" target="_blank">Order on WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="membership" id="membership">
+  <h2>Protein Breakfast Membership</h2>
+  <p>
+    Start your day with a fresh, wholesome protein-rich breakfast.
+    Join our membership and make nutritious mornings part of your routine.
+  </p>
+  <a href="https://wa.me/" class="button">Join Membership</a>
+</section>
+
+<footer>
+  <h2>Ira Limited & Co.</h2>
+  <p>Pure • Natural • Yours</p>
+  <p>Premium food essentials for everyday living.</p>
+  <p>© 2026 Ira Limited & Co. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
