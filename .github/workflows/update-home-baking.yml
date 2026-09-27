@@ -1,0 +1,35 @@
+name: Update Home Baking Products
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update-products:
+    if: ${{ !contains(github.event.head_commit.message, '[home-baking-updated]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Home Baking catalogue
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('shop.html')
+          s=p.read_text()
+          s=s.replace("{id:10,cat:'Home Baking',name:'Tea Cake',desc:'Fresh homemade tea cake',price:399},", "")
+          s=s.replace("{id:12,cat:'Home Baking',name:'Brownies',desc:'Fresh homemade brownies',price:449,img:'brownies.jpeg'},", "{id:12,cat:'Home Baking',name:'Brownies',desc:'Classic homemade brownies',price:449,img:'brownies.jpeg'},{id:17,cat:'Home Baking',name:'Protein Brownies',desc:'Homemade protein-focused brownies',price:499},")
+          p.write_text(s)
+          PY
+      - name: Commit catalogue update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add shop.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Update home baking products [home-baking-updated]"
+          git push
