@@ -1,0 +1,35 @@
+name: Update breakfast membership
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  update:
+    if: ${{ !startsWith(github.event.head_commit.message, 'Update breakfast membership prices') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update membership cards
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('shop.html')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}', '.plans{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}')
+          s = s.replace("addPlan('Weekly Breakfast Membership',1299)", "addPlan('Weekly Breakfast Membership',2999)")
+          s = s.replace('Add membership · ₹1,299', 'Add membership · ₹2,999')
+          s = s.replace("addPlan('Monthly Breakfast Membership',4999)", "addPlan('Monthly Breakfast Membership',8999)")
+          s = s.replace('Add membership · ₹4,999', 'Add membership · ₹8,999')
+          family = '<div class="plan"><h3>Family</h3><p>A convenient plan for multiple family members.</p><button onclick="addPlan(\'Family Breakfast Membership\',7499)">Add membership · ₹7,499</button></div>'
+          s = s.replace(family, '')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit changes and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -f .github/workflows/update-membership.yml
+          git add shop.html .github/workflows/update-membership.yml
+          git commit -m 'Update breakfast membership prices'
+          git push
