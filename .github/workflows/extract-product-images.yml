@@ -1,0 +1,37 @@
+name: Extract product images
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  extract-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract product images from uploaded package
+        run: |
+          set -e
+          ZIP="ira-product-images-and-shop-update (3).zip"
+          if [ ! -f "$ZIP" ]; then
+            ZIP=$(find . -maxdepth 1 -type f -name '*.zip' | head -n 1)
+          fi
+          if [ -z "$ZIP" ]; then
+            echo "No product package zip found; nothing to do."
+            exit 0
+          fi
+          mkdir -p .tmp-product-package
+          unzip -o "$ZIP" -d .tmp-product-package
+          find .tmp-product-package -maxdepth 1 -type f -name '*.jpg' -exec cp -f {} . \;
+          rm -rf .tmp-product-package
+      - name: Commit extracted images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add '*.jpg'
+          if git diff --cached --quiet; then
+            echo "No new image files to commit."
+            exit 0
+          fi
+          git commit -m "Add product photography"
+          git push
