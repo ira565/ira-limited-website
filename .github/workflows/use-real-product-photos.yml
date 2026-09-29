@@ -1,0 +1,51 @@
+name: Use real product photography
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update-photo-paths:
+    if: ${{ !contains(github.event.head_commit.message, '[real-product-photos]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Point product cards at uploaded product photography
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('shop.html')
+          s = p.read_text()
+          replacements = {
+            "product-images/premium-peanut-oil.svg": "peanut%20oil.jpeg",
+            "product-images/premium-forest-honey.svg": "WhatsApp%20Image%202026-09-28%20at%209.57.41%20PM.jpeg",
+            "product-images/premium-ajwain-honey.svg": "WhatsApp%20Image%202026-09-28%20at%209.59.13%20PM.jpeg",
+            "product-images/premium-cow-ghee.svg": "ghee.jpeg",
+            "product-images/premium-coconut-oil.svg": "cocnut%20oil.jpeg",
+            "product-images/premium-flaxseed-oil.svg": "flaxseed%20oil.jpeg",
+            "product-images/premium-eggs.svg": "egg.jpeg",
+            "product-images/premium-multigrain-cookies.svg": "multigrain-cookies.jpg",
+            "product-images/premium-protein-bites.svg": "protein-bites.jpg",
+            "product-images/premium-seed-trail-mix.svg": "seed-trail-mix.jpg",
+            "product-images/premium-brownies.svg": "brownies.jpeg",
+            "product-images/premium-protein-brownies.svg": "protein-brownies.jpg",
+            "product-images/premium-protein-cheesecake.svg": "protein-cheesecake.jpg",
+            "product-images/premium-tiramisu.svg": "tiramisu.jpg",
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+          p.write_text(s)
+          PY
+      - name: Commit photo-path update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add shop.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Use real product photography [real-product-photos]"
+          git push
