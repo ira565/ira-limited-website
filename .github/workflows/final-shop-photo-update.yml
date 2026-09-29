@@ -44,6 +44,14 @@ jobs:
             "product-images/premium-protein-brownies.svg": "protein-brownies.jpg",
             "product-images/premium-protein-cheesecake.svg": "protein-cheesecake.jpg",
             "product-images/premium-tiramisu.svg": "tiramisu.jpg",
+
+            # Vegetable photography
+            "product-images/premium-carrots.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Carrot%20vegetable%20on%20white%20background.jpg",
+            "product-images/premium-onions.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Onion%20white%20background2.jpg",
+            "product-images/premium-cucumber.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Cucumber%20and%20cross%20section.jpg",
+            "product-images/premium-capsicum.svg": "https://freshby4roots.com/cdn/shop/files/Green-Bell-Peppers.jpg?v=1745429391&width=1920",
+            "product-images/premium-cauliflower.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Cauliflower%20white.jpg",
+            "product-images/premium-beetroot.svg": "https://www.cuisineo.com/images/aliments/betterave.jpg",
           }
           for old, new in replacements.items():
               s = s.replace(old, new)
@@ -53,8 +61,10 @@ jobs:
           if 'function filterChange()' not in s:
               s = s.replace(marker, "function filterChange(){const f=document.getElementById('filter').value;if(f==='breakfast'){document.getElementById('membership').scrollIntoView({behavior:'smooth'});return}render()}" + marker)
 
-          # Make photographic cards look clean and consistent.
+          # Keep real product photography crisp and give vegetable photos a clean white presentation.
           s = s.replace('object-fit:contain;object-position:center;padding:10px;image-rendering:auto;background:linear-gradient(180deg,#f4eddf,#eee6d5)', 'object-fit:cover;object-position:center;image-rendering:auto')
+          s = s.replace('.pic img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;image-rendering:auto}', '.pic img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;image-rendering:auto}.pic img.veg-photo{object-fit:contain;background:#fff;padding:8px}')
+          s = s.replace('<img src="${p.img}" alt="${p.name}" loading="lazy">', '<img class="${p.cat===\'vegetables\'?\'veg-photo\':\'\'}" src="${p.img}" alt="${p.name}" loading="lazy">')
           p.write_text(s)
           PY
       - name: Commit final shop update
