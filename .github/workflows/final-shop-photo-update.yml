@@ -1,78 +1,10 @@
 name: Final shop photo update
-
 on:
-  push:
-    branches: [main]
-
+  workflow_dispatch:
 permissions:
-  contents: write
-
+  contents: read
 jobs:
-  update-shop:
-    if: ${{ !contains(github.event.head_commit.message, '[final-shop-photo-update]') }}
+  disabled:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Apply final shop layout and real product photography
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('shop.html')
-          s = p.read_text()
-
-          replacements = {
-            # Category order
-            '<option value="vegetables">Vegetables</option><option value="baking">Home Baking</option>': '<option value="baking">Home Baking</option><option value="vegetables">Vegetables</option><option value="breakfast">Breakfast Club</option>',
-            '<select id="filter" class="filter" onchange="render()">': '<select id="filter" class="filter" onchange="filterChange()">',
-
-            # Real product photography already stored in this repository
-            "product-images/premium-peanut-oil.svg": "peanut%20oil.jpeg",
-            "product-images/premium-organic-peanut-oil.svg": "peanut%20oil.jpeg",
-            "product-images/premium-forest-honey.svg": "forest-honey.jpg",
-            "product-images/premium-ajwain-honey.svg": "ajwain-honey.jpg",
-            "product-images/premium-multi-flower-honey.svg": "multi-flower-honey.jpg",
-            "product-images/premium-honey-mix.svg": "honey-mix.jpg",
-            "product-images/premium-cow-ghee.svg": "ghee.jpeg",
-            "product-images/premium-coconut-oil.svg": "cocnut%20oil.jpeg",
-            "product-images/premium-flaxseed-oil.svg": "flaxseed-oil.jpg",
-            "product-images/premium-eggs.svg": "egg.jpeg",
-            "product-images/premium-multigrain-cookies.svg": "multigrain-cookies.jpg",
-            "product-images/premium-protein-bites.svg": "choco-dipped-protein-bites.jpg",
-            "product-images/premium-seed-trail-mix.svg": "seed-trail-mix.jpg",
-            "product-images/premium-brownies.svg": "brownies.jpeg",
-            "product-images/premium-protein-brownies.svg": "protein-brownies.jpg",
-            "product-images/premium-protein-cheesecake.svg": "protein-cheesecake.jpg",
-            "product-images/premium-tiramisu.svg": "tiramisu.jpg",
-
-            # Vegetable photography
-            "product-images/premium-carrots.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Carrot%20vegetable%20on%20white%20background.jpg",
-            "product-images/premium-onions.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Onion%20white%20background2.jpg",
-            "product-images/premium-cucumber.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Cucumber%20and%20cross%20section.jpg",
-            "product-images/premium-capsicum.svg": "https://freshby4roots.com/cdn/shop/files/Green-Bell-Peppers.jpg?v=1745429391&width=1920",
-            "product-images/premium-cauliflower.svg": "https://commons.wikimedia.org/wiki/Special:FilePath/Cauliflower%20white.jpg",
-            "product-images/premium-beetroot.svg": "https://www.cuisineo.com/images/aliments/betterave.jpg",
-          }
-          for old, new in replacements.items():
-              s = s.replace(old, new)
-
-          # Keep Breakfast Club as a filter that opens the membership section.
-          marker = "const products=["
-          if 'function filterChange()' not in s:
-              s = s.replace(marker, "function filterChange(){const f=document.getElementById('filter').value;if(f==='breakfast'){document.getElementById('membership').scrollIntoView({behavior:'smooth'});return}render()}" + marker)
-
-          # Keep real product photography crisp and give vegetable photos a clean white presentation.
-          s = s.replace('object-fit:contain;object-position:center;padding:10px;image-rendering:auto;background:linear-gradient(180deg,#f4eddf,#eee6d5)', 'object-fit:cover;object-position:center;image-rendering:auto')
-          s = s.replace('.pic img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;image-rendering:auto}', '.pic img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;image-rendering:auto}.pic img.veg-photo{object-fit:contain;background:#fff;padding:8px}')
-          s = s.replace('<img src="${p.img}" alt="${p.name}" loading="lazy">', '<img class="${p.cat===\'vegetables\'?\'veg-photo\':\'\'}" src="${p.img}" alt="${p.name}" loading="lazy">')
-          p.write_text(s)
-          PY
-      - name: Commit final shop update
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add shop.html
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Apply final shop photography and category order [final-shop-photo-update]"
-          git push
+      - run: echo "Superseded by the current shop.html update; no automatic rewrite is performed."
