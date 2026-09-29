@@ -22,19 +22,20 @@ jobs:
           s = p.read_text()
           replacements = {
             "product-images/premium-peanut-oil.svg": "peanut%20oil.jpeg",
-            "product-images/premium-forest-honey.svg": "WhatsApp%20Image%202026-09-28%20at%209.57.41%20PM.jpeg",
-            "product-images/premium-ajwain-honey.svg": "WhatsApp%20Image%202026-09-28%20at%209.59.13%20PM.jpeg",
+            "product-images/premium-forest-honey.svg": "forest-honey.jpg",
+            "product-images/premium-ajwain-honey.svg": "ajwain-honey.jpg",
             "product-images/premium-cow-ghee.svg": "ghee.jpeg",
             "product-images/premium-coconut-oil.svg": "cocnut%20oil.jpeg",
-            "product-images/premium-flaxseed-oil.svg": "flaxseed%20oil.jpeg",
+            "product-images/premium-flaxseed-oil.svg": "flaxseed-oil.jpg",
             "product-images/premium-eggs.svg": "egg.jpeg",
             "product-images/premium-multigrain-cookies.svg": "multigrain-cookies.jpg",
-            "product-images/premium-protein-bites.svg": "protein-bites.jpg",
+            "product-images/premium-protein-bites.svg": "choco-dipped-protein-bites.jpg",
             "product-images/premium-seed-trail-mix.svg": "seed-trail-mix.jpg",
             "product-images/premium-brownies.svg": "brownies.jpeg",
             "product-images/premium-protein-brownies.svg": "protein-brownies.jpg",
             "product-images/premium-protein-cheesecake.svg": "protein-cheesecake.jpg",
             "product-images/premium-tiramisu.svg": "tiramisu.jpg",
+            "product-images/premium-honey-mix.svg": "honey-mix.jpg",
           }
           for old, new in replacements.items():
               s = s.replace(old, new)
