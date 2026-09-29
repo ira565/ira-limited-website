@@ -1,22 +1,10 @@
 name: Fix honey image path
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
-  fix:
-    if: github.event.head_commit.message != 'Fix honey image path'
+  disabled:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - name: Replace honey image path
-        run: sed -i 's/honey\.jpeg/honey.svg/g' shop.html
-      - name: Commit
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add shop.html
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Fix honey image path'
-          git push
+      - run: echo "Superseded by the current shop.html update; no automatic rewrite is performed."
