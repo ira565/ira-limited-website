@@ -1,48 +1,10 @@
 name: Update Home Baking Products
-
 on:
-  push:
-    branches: [main]
-
+  workflow_dispatch:
 permissions:
-  contents: write
-
+  contents: read
 jobs:
-  update-products:
-    if: ${{ !contains(github.event.head_commit.message, '[home-baking-updated]') }}
+  disabled:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Update product catalogue and photography
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('shop.html')
-          s=p.read_text()
-
-          # Keep the requested Home Baking range.
-          s=s.replace("{id:10,cat:'Home Baking',name:'Tea Cake',desc:'Fresh homemade tea cake',price:399},", "")
-          s=s.replace("{id:12,cat:'Home Baking',name:'Brownies',desc:'Fresh homemade brownies',price:449,img:'brownies.jpeg'},", "{id:12,cat:'Home Baking',name:'Brownies',desc:'Classic homemade brownies',price:449,img:'brownies.jpeg'},")
-          s=s.replace("{id:17,cat:'Home Baking',name:'Protein Brownies',desc:'Homemade protein-focused brownies',price:499}", "{id:17,cat:'Home Baking',name:'Protein Brownies',desc:'Homemade protein-focused brownies',price:499,img:'protein-brownies.jpg'}")
-          s=s.replace("{id:14,cat:'Home Baking',name:'Multigrain Biscuits',desc:'Homemade multigrain biscuits',price:299}", "{id:14,cat:'Home Baking',name:'Multigrain Biscuits',desc:'Homemade multigrain biscuits',price:299,img:'multigrain-cookies.jpg'}")
-          s=s.replace("{id:15,cat:'Home Baking',name:'Protein Cheesecake',desc:'Homemade protein-focused cheesecake',price:549}", "{id:15,cat:'Home Baking',name:'Protein Cheesecake',desc:'Homemade protein-focused cheesecake',price:549,img:'protein-cheesecake.jpg'}")
-          s=s.replace("{id:16,cat:'Home Baking',name:'Protein Tiramisu',desc:'Homemade protein-focused tiramisu',price:599}", "{id:16,cat:'Home Baking',name:'Protein Tiramisu',desc:'Homemade protein-focused tiramisu',price:599,img:'tiramisu.jpg'}")
-
-          # Add each newly supplied product only once.
-          marker="{id:16,cat:'Home Baking',name:'Protein Tiramisu',desc:'Homemade protein-focused tiramisu',price:599,img:'tiramisu.jpg'}"
-          additions="""{id:18,cat:'Home Baking',name:'Protein Bites',desc:'Homemade protein snack bites',price:399,img:'protein-bites.jpg'},{id:19,cat:'Organic Products',name:'Seed Trail Mix',desc:'Nuts, seeds and dried fruit snack mix',price:449,img:'seed-trail-mix.jpg'},{id:20,cat:'Home Baking',name:'Matilda Cake',desc:'Rich chocolate celebration cake',price:699,img:'matilda-cake.jpg'},{id:21,cat:'Organic Products',name:'Flaxseed Oil',desc:'Cold-pressed flaxseed oil',price:599,img:'flaxseed-oil.jpg'},{id:22,cat:'Organic Products',name:'Almond Oil',desc:'Premium almond oil',price:749,img:'almond-oil.jpg'},{id:23,cat:'Home Baking',name:'Tiramisu',desc:'Classic homemade tiramisu',price:549,img:'tiramisu.jpg'}"""
-          if "name:'Protein Bites'" not in s:
-              s=s.replace(marker, marker+","+additions)
-
-          p.write_text(s)
-          PY
-      - name: Commit catalogue update
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add shop.html
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "Update product catalogue and images [home-baking-updated]"
-          git push
+      - run: echo "Superseded by the current shop.html update; no automatic rewrite is performed."
