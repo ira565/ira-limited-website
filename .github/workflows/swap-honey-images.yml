@@ -1,0 +1,34 @@
+name: Fix honey image order
+on:
+  push:
+    paths:
+      - '.github/workflows/swap-honey-images.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swap Forest and Ajwain image references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('shop.html')
+          s = p.read_text()
+          forest = 'WhatsApp%20Image%202026-09-28%20at%209.57.41%20PM.jpeg'
+          ajwain = 'WhatsApp%20Image%202026-09-28%20at%209.59.13%20PM.jpeg'
+          marker = 'FIXED_HONEY_IMAGE_ORDER'
+          if marker not in s:
+              s = s.replace(ajwain, marker, 1).replace(forest, ajwain, 1).replace(marker, forest, 1)
+              p.write_text(s)
+          PY
+          if git diff --quiet -- shop.html; then
+            echo 'No change needed.'
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add shop.html
+            git commit -m 'Fix Forest Honey and Ajwain Honey image order'
+            git push
+          fi
